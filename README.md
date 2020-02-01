@@ -11,4 +11,6 @@ The main aim of the project is to design a robot whitch user can cummunicate wit
 
 # Function of each parts
 # Citation
+The code of getting data and send data if cite from 
+click link to gain more information https://www.youtube.com/watch?v=LJm6fgsAG0I
 # Conclution
