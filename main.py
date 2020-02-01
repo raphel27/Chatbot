@@ -4,21 +4,21 @@ import re
 import random
 
 url = "https://api.telegram.org/bot1078830395:AAGsi7i_dxc3T7iqQQYQVBYjHGDT8M92zOU/"
+# the code with (cite) is cite from youtube, go to citation to gain more information
 
-
-# create chat ID
+# create chat ID (cite)
 def get_chat_id(update):
     chat_id = update["message"]["chat"]["id"]
     return chat_id
 
 
-# get message
+# get message from the telegram (cite)
 def get_message_text(update):
     message_text = update["message"]["text"]
     return message_text
 
 
-# get last up date
+# get last up date (cite)
 def last_update(req):
     response = requests.get(req + "getUpdates")
     response = response.json()
@@ -27,13 +27,14 @@ def last_update(req):
     return result[total_updates]
 
 
-# send back
+# send back to the chat (cite)
 def send_message(chat_id, message_text):
     params = {"chat_id": chat_id, "text": message_text}
     response = requests.post(url + "sendMessage", data=params)
     return response
 
 
+# Identify the key word from user's sentences
 def interpret(message):
     msg = message.lower()
     if 'hi' in msg:
@@ -59,6 +60,7 @@ def interpret(message):
     return 'none'
 
 
+# get stock information
 a = Stock("AAPL", token="pk_20eee9b7062744679cd544d3c3170f6d")
 APP = a.get_quote()
 b = Stock("GOOGL", token="pk_20eee9b7062744679cd544d3c3170f6d")
@@ -69,6 +71,7 @@ OTHER = 1
 KEEPASK = 2
 FINISH = 3
 
+# match rules and get reply
 policy_rules = {
     (WORK, 'id'): (WORK, "How can I help you?", None),
     (WORK, "self"): (WORK, "I'm a stock bot which means I can give you some information about stock", None),
@@ -100,6 +103,7 @@ rules = {'if (.*)': ["Do you really think it's likely that {0}", 'Do you wish th
                                   'What about {0}', 'Yes .. and?']}
 
 
+# replace the pronouns
 def replace_pronouns(message):
     message = message.lower()
     if 'me' in message:
@@ -116,6 +120,7 @@ def replace_pronouns(message):
     return message
 
 
+# identify response for normal chat
 def chitchat_response(message):
     response, phrase = match_rule(rules, message)
     if response == "default":
